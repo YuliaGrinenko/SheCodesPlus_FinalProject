@@ -1,15 +1,14 @@
 function showWeather(response) {
   let temperatureElement = document.querySelector("#current-temperature-value");
-  let temperature = response.data.temperature;
+  let temperature = response.data.main.temp;
   temperatureElement.innerHTML = Math.round(temperature);
   let cityElement = document.querySelector("#current-city");
-  cityElement.innerHTML = response.data.city.name;
-  console.log(response);
+  cityElement.innerHTML = response.data.name;
 }
 
 function searchApi(city) {
   let apiKey = "195c2c787bc01a377e2ef01266be08ce";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=195c2c787bc01a377e2ef01266be08ce&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=195c2c787bc01a377e2ef01266be08ce&units=metric`;
   axios.get(apiUrl).then(showWeather);
 }
 function searchCity(event) {
