@@ -6,7 +6,6 @@ function showWeather(response) {
   cityElement.innerHTML = response.data.name;
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.weather[0].description;
-  console.log(response.data);
   let windSpeedElement = document.querySelector("#wind-speed");
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   let humidityElement = document.querySelector("#humidity");
@@ -19,6 +18,8 @@ function showWeather(response) {
   let timeElement = document.querySelector("#current-day-time");
   let date = new Date(response.data.dt * 1000);
   timeElement.innerHTML = formatDate(date);
+
+  getForecast(response.data.name);
 }
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -55,5 +56,35 @@ function searchCity(event) {
 }
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", searchCity);
+
+function showForecast(response) {
+  console.log(response.data);
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-icon"></div>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong></strong>
+          </div>
+          <div class="weather-forecast-temperature"></div>
+        </div>
+      </div>
+    `;
+  });
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+function getForecast(city) {
+  let apiKey = "195c2c787bc01a377e2ef01266be08ce";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios(apiUrl).then(showForecast);
+}
 
 searchApi("London");
