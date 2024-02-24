@@ -8,55 +8,57 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
-    <header>
-      <form id="search-form">
-        <input
-          type="search"
-          placeholder="Enter a city.."
-          required
-          class="search-input"
-          id="search-input"
-        />
-        <input type="submit" value="Search" class="search-button" />
-      </form>
-    </header>
-    <main>
-      <div class="current-weather">
-        <div>
-          <span
-            id="current-temperature-value"
-            class="current-temperature-value"
-          ></span>
-          <span class="current-temperature-unit">°C</span>
-          <h1 class="current-city" id="current-city"></h1>
-          <p id="current-day-time"></p>
+    <div class="weather-app">
+      <header>
+        <form id="search-form">
+          <input
+            type="search"
+            placeholder="Enter a city.."
+            required
+            class="search-input"
+            id="search-input"
+          />
+          <input type="submit" value="Search" class="search-button" />
+        </form>
+      </header>
+      <main>
+        <div class="current-weather">
+          <div>
+            <span
+              id="current-temperature-value"
+              class="current-temperature-value"
+            ></span>
+            <span class="current-temperature-unit">°C</span>
+            <h1 class="current-city" id="current-city"></h1>
+            <p id="current-day-time"></p>
+          </div>
+          <div>
+            <span class="current-temperature-icon" id="icon"></span>
+            <p>
+              <span id="description"></span><br />
+              humidity: <span id="humidity"></span>,<br />
+              wind: <span id="wind-speed"></span>
+            </p>
+          </div>
         </div>
-        <div>
-          <span class="current-temperature-icon" id="icon"></span>
-          <p>
-            <span id="description"></span><br />
-            humidity: <span id="humidity"></span>,<br />
-            wind: <span id="wind-speed"></span>
-          </p>
-        </div>
-      </div>
-    </main>
-    <footer>
-      <p>
-        This project was coded by
-        <a href="https://github.com/YuliaGrinenko" target="_blank"
-          >Yulia Hrinenko</a
-        >
-        and is
-        <a href="" target="_blank"> on GitHub</a>
-        and
-        <a
-          href="https://shecodesplus-week7-yulia-hrinenko.netlify.app"
-          target="_blank"
-          >hosted on Netlify</a
-        >
-      </p>
-    </footer>
+      </main>
+      <footer>
+        <p>
+          This project was coded by
+          <a href="https://github.com/YuliaGrinenko" target="_blank"
+            >Yulia Hrinenko</a
+          >
+          and is
+          <a href="" target="_blank"> on GitHub</a>
+          and
+          <a
+            href="https://shecodesplus-week7-yulia-hrinenko.netlify.app"
+            target="_blank"
+            >hosted on Netlify</a
+          >
+        </p>
+      </footer>
+    </div>
   </body>
   <script src="src/index.js"></script>
 </html>

@@ -11,8 +11,11 @@ function showWeather(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
+  let icon = response.data.weather[0].icon;
   let iconElement = document.querySelector("#icon");
-  iconElement.innerHTML = `<img src="response.data.weather[0].icon"/>`;
+  let iconId = response.data.weather[0].icon;
+  iconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${iconId}@2x.png"/>`;
+
   let timeElement = document.querySelector("#current-day-time");
   let date = new Date(response.data.dt * 1000);
   timeElement.innerHTML = formatDate(date);
