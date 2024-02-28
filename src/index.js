@@ -10,10 +10,9 @@ function showWeather(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
-  let icon = response.data.weather[0].icon;
   let iconElement = document.querySelector("#icon");
   let iconId = response.data.weather[0].icon;
-  iconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${iconId}@2x.png"/>`;
+  iconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${iconId}@2x.png" class="current-temperature-icon"/>`;
 
   let timeElement = document.querySelector("#current-day-time");
   let date = new Date(response.data.dt * 1000);
@@ -46,6 +45,8 @@ function searchApi(city) {
   let apiKey = "195c2c787bc01a377e2ef01266be08ce";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=195c2c787bc01a377e2ef01266be08ce&units=metric`;
   axios.get(apiUrl).then(showWeather);
+  //https:https://api.openweathermap.org/data/3.0/onecall?q=London&appid=195c2c787bc01a377e2ef01266be08ce&units=metric
+  //https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=195c2c787bc01a377e2ef01266be08ce
 }
 function searchCity(event) {
   event.preventDefault();
@@ -57,18 +58,23 @@ function searchCity(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", searchCity);
 
+function formatDay(date) {
+  let dateForecast = new Date(response.data.list.dt * 1000);
+  console.log(dateForecast);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[dateForecast.getDay()];
+}
+
 function showForecast(response) {
-  console.log(response.data);
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let forecastHtml = "";
 
-  days.forEach(function (day) {
+  response.data.list.forEach(function (day) {
     forecastHtml =
       forecastHtml +
-      `
-      <div class="weather-forecast-day">
-        <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon"></div>
+      `<div class="weather-forecast-day">
+        <div class="weather-forecast-date"></div>
+        
         <div class="weather-forecast-temperatures">
           <div class="weather-forecast-temperature">
             <strong></strong>
@@ -78,13 +84,16 @@ function showForecast(response) {
       </div>
     `;
   });
+
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
-function getForecast(city) {
+
+http: function getForecast(city) {
   let apiKey = "195c2c787bc01a377e2ef01266be08ce";
   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  axios(apiUrl).then(showForecast);
-}
 
+  //https://api.openweathermap.org/data/2.5/forecast?q=London&appid=195c2c787bc01a377e2ef01266be08ce&units=metric
+  https: axios.get(apiUrl).then(showForecast);
+}
 searchApi("London");
