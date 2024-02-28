@@ -30,20 +30,22 @@
       <main>
         <div class="current-weather">
           <div class="temperature-container">
-            <div class="current-temperature-icon" id="icon"></div>
-            <div id="description" class="description"></div>
             <div
               id="current-temperature-value"
               class="current-temperature-value"
             ></div>
             <div class="current-temperature-unit">°C</div>
+            <div class="current-temperature-icon" id="icon"></div>
           </div>
           <div class="city-details">
             <h1 class="current-city" id="current-city"></h1>
             <p id="current-day-time"></p>
+
+            <p id="description" class="description"></p>
             <p>
-              humidity: <span id="humidity"></span>,<br />
-              wind: <span id="wind-speed"></span>
+              humidity:
+              <span class="weather-conditions" id="humidity"></span>,<br />
+              wind: <span class="weather-conditions" id="wind-speed"></span>
             </p>
           </div>
         </div>
