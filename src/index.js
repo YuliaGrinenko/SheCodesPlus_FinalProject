@@ -17,8 +17,6 @@ function showWeather(response) {
   let timeElement = document.querySelector("#current-day-time");
   let date = new Date(response.data.dt * 1000);
   timeElement.innerHTML = formatDate(date);
-
-  getForecast(response.data.name);
 }
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -39,6 +37,21 @@ function formatDate(date) {
   }
   console.log();
   return `${day}, ${hours}:${minutes}`;
+}
+
+function getCoordinates(response) {
+  let lat = response.data[0].lat;
+  let lon = response.data[0].lon;
+  console.log(response.data[0].lat);
+  console.log(response.data[0].lon);
+  let apiKey = "195c2c787bc01a377e2ef01266be08ce";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=195c2c787bc01a377e2ef01266be08ce`;
+  axios.get(apiUrl).then(showForecast);
+}
+
+function getLocation(city) {
+  let apiUrllocation = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=195c2c787bc01a377e2ef01266be08ce`;
+  axios.get(apiUrllocation).then(getCoordinates);
 }
 
 function searchApi(city) {
@@ -67,33 +80,8 @@ function formatDay(date) {
 }
 
 function showForecast(response) {
-  let forecastHtml = "";
-
-  response.data.list.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `<div class="weather-forecast-day">
-        <div class="weather-forecast-date"></div>
-        
-        <div class="weather-forecast-temperatures">
-          <div class="weather-forecast-temperature">
-            <strong></strong>
-          </div>
-          <div class="weather-forecast-temperature"></div>
-        </div>
-      </div>
-    `;
-  });
-
-  let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = forecastHtml;
+  console.log(response);
 }
 
-http: function getForecast(city) {
-  let apiKey = "195c2c787bc01a377e2ef01266be08ce";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-
-  //https://api.openweathermap.org/data/2.5/forecast?q=London&appid=195c2c787bc01a377e2ef01266be08ce&units=metric
-  https: axios.get(apiUrl).then(showForecast);
-}
 searchApi("London");
+getLocation("London");
