@@ -17,6 +17,8 @@ function showWeather(response) {
   let timeElement = document.querySelector("#current-day-time");
   let date = new Date(response.data.dt * 1000);
   timeElement.innerHTML = formatDate(date);
+
+  getLocation(response.data.name);
 }
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -42,10 +44,8 @@ function formatDate(date) {
 function getCoordinates(response) {
   let lat = response.data[0].lat;
   let lon = response.data[0].lon;
-  console.log(response.data[0].lat);
-  console.log(response.data[0].lon);
   let apiKey = "195c2c787bc01a377e2ef01266be08ce";
-  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=195c2c787bc01a377e2ef01266be08ce`;
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=195c2c787bc01a377e2ef01266be08ce&units=metric`;
   axios.get(apiUrl).then(showForecast);
 }
 
@@ -58,8 +58,6 @@ function searchApi(city) {
   let apiKey = "195c2c787bc01a377e2ef01266be08ce";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=195c2c787bc01a377e2ef01266be08ce&units=metric`;
   axios.get(apiUrl).then(showWeather);
-  //https:https://api.openweathermap.org/data/3.0/onecall?q=London&appid=195c2c787bc01a377e2ef01266be08ce&units=metric
-  //https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=195c2c787bc01a377e2ef01266be08ce
 }
 function searchCity(event) {
   event.preventDefault();
@@ -72,16 +70,40 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", searchCity);
 
 function formatDay(date) {
-  let dateForecast = new Date(response.data.list.dt * 1000);
+  let dateForecast = new Date(response.data.daily.dt * 1000);
   console.log(dateForecast);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return days[dateForecast.getDay()];
 }
-
 function showForecast(response) {
-  console.log(response);
+  console.log(response.data);
+  let forecastHtml = "";
+
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date"></div>
+<img src="https://openweathermap.org/img/wn/${
+          day.weather[0].icon
+        }@2x.png" class="weather-forecast-icon"/>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong>${Math.round(day.temp.max)}º</strong>
+          </div>
+          <div class="weather-forecast-temperature">${Math.round(
+            day.temp.min
+          )}º</div>
+        </div>
+    `;
+    }
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
 }
 
 searchApi("London");
-getLocation("London");
