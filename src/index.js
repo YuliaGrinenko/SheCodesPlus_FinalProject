@@ -69,24 +69,23 @@ function searchCity(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", searchCity);
 
-function formatDay(date) {
-  let dateForecast = new Date(response.data.daily.dt * 1000);
-  console.log(dateForecast);
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  return days[dateForecast.getDay()];
+  return days[date.getDay()];
 }
 function showForecast(response) {
-  console.log(response.data);
+  console.log(response);
   let forecastHtml = "";
 
   response.data.daily.forEach(function (day, index) {
-    if (index < 5) {
+    if (index < 5 && index > 0) {
       forecastHtml =
         forecastHtml +
         `
       <div class="weather-forecast-day">
-        <div class="weather-forecast-date"></div>
+        <div class="weather-forecast-date">${formatDay(day.dt)}</div>
 <img src="https://openweathermap.org/img/wn/${
           day.weather[0].icon
         }@2x.png" class="weather-forecast-icon"/>
@@ -105,5 +104,4 @@ function showForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
-
 searchApi("London");
