@@ -80,10 +80,11 @@ function showForecast(response) {
   let forecastHtml = "";
 
   response.data.daily.forEach(function (day, index) {
-    if (index < 5 && index > 0) {
+    if (index < 6 && index > 0) {
       forecastHtml =
         forecastHtml +
         `
+      <div class="weather-forecast" id="forecast">
       <div class="weather-forecast-day">
         <div class="weather-forecast-date">${formatDay(day.dt)}</div>
 <img src="https://openweathermap.org/img/wn/${
@@ -97,6 +98,7 @@ function showForecast(response) {
             day.temp.min
           )}º</div>
         </div>
+         </div>
     `;
     }
   });

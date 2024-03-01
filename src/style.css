@@ -3,13 +3,11 @@ body {
   color: #ffff;
 }
 a {
-  font-weight: bold;
+  color: #ec6f4c;
 }
 
 .weather-app {
   background: #1a2639;
-  background-repeat: no-repeat;
-  background-size: contain;
   max-width: 600px;
   margin: 60px auto;
   padding: 30px;
@@ -29,6 +27,7 @@ header {
   outline: none;
   border-radius: 11px;
   padding: 10px;
+  background: #d9dad7;
   color: rgba(39, 33, 66, 0.8);
   transition: 0.2s ease-in-out;
   width: 80%;
@@ -45,9 +44,10 @@ header {
   padding: 10px 0;
   border-radius: 11px;
   color: #a6a6a6;
+  color: rgba(39, 33, 66, 0.8);
   transition: 0.2s ease-in-out;
   width: 15%;
-  background: #ffffffc5;
+  background: #d9dad7;
   cursor: pointer;
 }
 
@@ -71,50 +71,42 @@ main {
   position: relative;
 }
 
-.city-details {
-  margin-right: 40px;
-  text-align: right;
-  color: #ffff;
-}
 .current-temperature-value {
   position: relative;
   font-size: 80px;
   font-weight: bold;
   top: 20px;
 }
-
 .current-temperature-unit {
   font-size: 28px;
   position: relative;
   top: 30px;
 }
+.city-details {
+  text-align: right;
+  color: #ffff;
+}
+
 .current-city {
   font-size: 38px;
   font-weight: 900;
   margin-bottom: 0;
-  color: #ffff;
-}
-.weather-conditions {
-  font-weight: bold;
-}
-footer {
-  border-top: 1px solid #f9f7fe;
-  text-align: center;
-  padding-top: 15px;
-
-  color: #ffff;
+  color: #ec6f4c;
 }
 .weather-forecast {
   display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
+  justify-content: space-evenly;
+}
+.weather-forecast-day {
+  margin-top: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 .weather-forecast-date {
   text-align: center;
-  color: rgba(39, 33, 66, 0.4);
+  color: #ffff;
   font-size: 16px;
   line-height: 20px;
-  margin-bottom: 10px;
 }
 
 .weather-forecast-icon {
@@ -123,9 +115,17 @@ footer {
   display: block;
   margin: 0 auto;
 }
+
 .weather-forecast-temperatures {
   text-align: center;
   margin-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+footer {
+  border-top: 1px solid #f9f7fe;
+  text-align: center;
+  padding-top: 15px;
+  font-size: smaller;
+  color: #ffff;
 }
