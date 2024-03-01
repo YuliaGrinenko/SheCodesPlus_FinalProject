@@ -1,13 +1,14 @@
 body {
   font-family: "Montserrat", sans-serif;
+  color: #ffff;
 }
 a {
   font-weight: bold;
 }
 
 .weather-app {
+  background: #1a2639;
   background-repeat: no-repeat;
-  background-image: url("background.jpg");
   background-size: contain;
   max-width: 600px;
   margin: 60px auto;
@@ -69,20 +70,19 @@ main {
   height: 130px;
   position: relative;
 }
-.description {
-}
 
+.city-details {
+  margin-right: 40px;
+  text-align: right;
+  color: #ffff;
+}
 .current-temperature-value {
   position: relative;
   font-size: 80px;
   font-weight: bold;
   top: 20px;
 }
-.city-details {
-  margin-right: 40px;
-  text-align: right;
-  color: rgba(39, 33, 66, 0.8);
-}
+
 .current-temperature-unit {
   font-size: 28px;
   position: relative;
@@ -92,7 +92,7 @@ main {
   font-size: 38px;
   font-weight: 900;
   margin-bottom: 0;
-  color: black;
+  color: #ffff;
 }
 .weather-conditions {
   font-weight: bold;
@@ -102,7 +102,7 @@ footer {
   text-align: center;
   padding-top: 15px;
 
-  color: rgba(39, 33, 66, 0.8);
+  color: #ffff;
 }
 .weather-forecast {
   display: flex;
