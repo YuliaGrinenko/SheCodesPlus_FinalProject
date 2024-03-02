@@ -20,6 +20,8 @@ header {
   padding-bottom: 30px;
 }
 .search-form {
+  display: flex;
+  justify-content: center;
 }
 .search-input {
   font-family: "Montserrat", sans-serif;
@@ -49,6 +51,9 @@ header {
   width: 15%;
   background: #d9dad7;
   cursor: pointer;
+}
+.search-button i {
+  margin-right: 5px;
 }
 
 main {
