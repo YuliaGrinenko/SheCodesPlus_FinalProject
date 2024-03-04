@@ -50,7 +50,7 @@ function getCoordinates(response) {
 }
 
 function getLocation(city) {
-  let apiUrllocation = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=195c2c787bc01a377e2ef01266be08ce`;
+  let apiUrllocation = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=195c2c787bc01a377e2ef01266be08ce`;
   axios.get(apiUrllocation).then(getCoordinates);
 }
 
